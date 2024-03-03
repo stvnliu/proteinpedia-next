@@ -1,0 +1,43 @@
+.page {
+        margin-left: min(20%, 200px);
+        margin-right: min(20%, 200px);
+}
+.page-title {
+        font-size: xx-large;
+        font-weight: bolder;
+        font-style: italic;
+        text-decoration:underline;
+        text-align: center;
+}
+.heading-0 {
+        font-size: x-large;
+        font-weight: bold;
+}
+.heading-1 {
+        font-size: x-large;
+        font-style: italic;
+}
+.heading-2 {
+        font-size: larger;
+        font-weight: bold;
+}
+.heading-3 {
+        font-size: large;
+        font-style: italic;
+}
+.heading-4 {
+        font-size: medium;
+        font-weight: bold;
+}
+.heading-5 {
+        font-size: medium;
+        font-style: italic;
+}
+.heading {
+        text-decoration: underline;
+        text-align: center;
+}
+.footnote {
+        font-size: small;
+        color: gray;
+}
