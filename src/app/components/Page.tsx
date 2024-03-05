@@ -5,7 +5,7 @@ import {
 	PageContentType,
 	SectionContent,
 	TextContent,
-} from "../types/page";
+} from "../types/pageTypes";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 

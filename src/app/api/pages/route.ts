@@ -1,4 +1,4 @@
-import { PageData } from "@/app/types/page";
+import { PageData } from "@/app/types/pageTypes";
 import { MongoClient } from "mongodb";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { NextRequest, NextResponse } from "next/server";
