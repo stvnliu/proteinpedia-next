@@ -6,12 +6,11 @@
 
   # https://devenv.sh/packages/
   packages = [ pkgs.git ];
-  cachix.enable = false;
+  cachix.enable = true;
   # https://devenv.sh/scripts/
-  scripts.hello.exec = "echo hello from $GREET";
+  scripts.prompt.exec = "echo devenv up command available to load a ferretdb and postgresql server.";
 
   enterShell = ''
-    hello
     git --version
   '';
 
@@ -33,10 +32,22 @@
     typescript.enable = true;
   };
   # https://devenv.sh/pre-commit-hooks/
-  pre-commit.hooks.shellcheck.enable = true;
-  pre-commit.hooks.commitizen.enable = true;
+  pre-commit.hooks = {
+    shellcheck.enable = true;
+    commitizen.enable = true;
+  };
   # https://devenv.sh/processes/
-  # processes.ping.exec = "ping example.com";
-
+  processes = {
+    ferretdb.exec = "${pkgs.ferretdb}/bin/ferretdb --postgresql-url=\"postgres://ferretdbuser:password@127.0.0.1:5432/ferretdb\"";
+    proteinpedia-dev.exec = "npm run dev";
+  };
+  services.postgres = {
+    enable = true;
+    initialDatabases = [{name = "ferretdb";}];
+    initialScript = ''
+    CREATE USER ferretdbuser;
+    GRANT ALL PRIVILEGES ON ferretdb.* TO ferretdbuser;
+    '';
+  };
   # See full reference at https://devenv.sh/reference/options/
 }
