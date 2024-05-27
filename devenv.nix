@@ -37,7 +37,6 @@
     shellcheck.enable = true;
     denofmt.enable = true;
     denolint.enable = true;
-    cspell.enable = true;
     commitizen.enable = true;
   };
   # https://devenv.sh/processes/
