@@ -1,11 +1,12 @@
 { pkgs, lib, config, inputs, ... }:
 
 {
+  name = "proteinpedia-next";
   # https://devenv.sh/basics/
   env.GREET = "devenv";
 
   # https://devenv.sh/packages/
-  packages = [ pkgs.git ];
+  packages = [ pkgs.git pkgs.mongosh ];
   cachix.enable = true;
   # https://devenv.sh/scripts/
   scripts.prompt.exec = "echo devenv up command available to load a ferretdb and postgresql server.";
@@ -40,14 +41,25 @@
   processes = {
     ferretdb.exec = "${pkgs.ferretdb}/bin/ferretdb --postgresql-url=\"postgres://ferretdbuser:password@127.0.0.1:5432/ferretdb\"";
     proteinpedia-dev.exec = "npm run dev";
+    pingtest.exec = "ping archlinux.org";
   };
   services.postgres = {
     enable = true;
     initialDatabases = [{name = "ferretdb";}];
     initialScript = ''
+    CREATE ROLE postgres SUPERUSER;
     CREATE USER ferretdbuser;
-    GRANT ALL PRIVILEGES ON ferretdb.* TO ferretdbuser;
+    GRANT ALL PRIVILEGES ON DATABASE "ferretdb" TO ferretdbuser;
+    GRANT ALL ON SCHEMA public TO ferretdbuser;
     '';
+    listen_addresses = "*";
+    settings = {
+      log_connections = true;
+      log_statement = "all";
+      logging_collector = true;
+      log_disconnections = true;
+      #log_destination = lib.mkForce "syslog";
+    };
   };
   # See full reference at https://devenv.sh/reference/options/
 }
