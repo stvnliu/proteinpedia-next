@@ -35,6 +35,9 @@
   # https://devenv.sh/pre-commit-hooks/
   pre-commit.hooks = {
     shellcheck.enable = true;
+    denofmt.enable = true;
+    denolint.enable = true;
+    cspell.enable = true;
     commitizen.enable = true;
   };
   # https://devenv.sh/processes/
