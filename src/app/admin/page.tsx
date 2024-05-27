@@ -18,7 +18,7 @@ export default function AdminPage() {
     });
     const requestBody = await dataRaw.json() as AdminLoginResponse;
     if (requestBody.success) {
-      location.assign(`/admin?auth=${requestBody.authKey}`);
+      location.assign(`/api/backend?auth=${requestBody.authKey}`);
     } else alert("NO");
   };
   return (
