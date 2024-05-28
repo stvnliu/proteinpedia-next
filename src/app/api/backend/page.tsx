@@ -20,7 +20,7 @@ export default async function AdminBackendPage(
           {documentsList.map((doc) => {
             const page = doc as PageData;
             return (
-              <li>
+              <li key={page._id.toString()}>
                 <a href={`/pages/info/${page.key}`}>{page.title}</a>
               </li>
             );

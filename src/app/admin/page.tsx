@@ -6,7 +6,7 @@ export default function AdminPage() {
       authKey: string;
       validUntil: number;
     };
-    alert("Running admin login function handler...");
+    console.log("Running admin login function handler...");
     const dataRaw = await fetch("/api/admin", {
       method: "POST",
       body: JSON.stringify({
@@ -19,7 +19,7 @@ export default function AdminPage() {
     const requestBody = await dataRaw.json() as AdminLoginResponse;
     if (requestBody.success) {
       location.assign(`/api/backend?auth=${requestBody.authKey}`);
-    } else alert("NO");
+    } else alert("ERROR[1001] Authentication failure");
   };
   return (
     <main>

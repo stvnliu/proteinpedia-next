@@ -1,5 +1,8 @@
 import { ObjectId } from "mongodb";
-
+export type AdminRequestData = {
+  adminName: string;
+  adminPassword: string;
+};
 export type PageData = {
   _id: ObjectId;
   key: string;
