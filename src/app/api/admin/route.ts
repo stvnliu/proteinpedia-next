@@ -2,11 +2,11 @@ import { AdminRequestData } from "@/app/types/pageTypes";
 import { randomUUID } from "crypto";
 import { MongoClient } from "mongodb";
 import { NextRequest, NextResponse } from "next/server";
-import pino from "pino";
+import { console } from "tracer";
 const mongoUrl = "mongodb://localhost:27017";
 const client = new MongoClient(mongoUrl);
 const credDbRef = client.db("proteinpedia").collection("cred");
-const logger = pino();
+const logger = console();
 export function GET() {
   return new NextResponse("ok");
 }

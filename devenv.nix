@@ -43,7 +43,7 @@
   processes = {
     ferretdb.exec = "${pkgs.ferretdb}/bin/ferretdb --postgresql-url=\"postgres://ferretdbuser:password@127.0.0.1:5432/ferretdb\"";
     proteinpedia-dev.exec = "npm run dev";
-    pingtest.exec = "ping archlinux.org";
+    #pingtest.exec = "ping archlinux.org";
   };
   services.postgres = {
     enable = true;
