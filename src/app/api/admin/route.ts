@@ -8,12 +8,14 @@ type AdminRequestData = {
 
 const mongoUrl = "mongodb://localhost:27017";
 const client = new MongoClient(mongoUrl);
-
+const credDbRef = client.db("proteinpedia").collection("cred");
 export function GET() {
   return new NextResponse("ok");
 }
 export async function POST(req: NextRequest) {
   const reqBody = await req.json() as AdminRequestData;
+  // FIXME Explicitly defined plaintext adminName and adminPassword
+  // FIXME Integrate SHA256-based password digests (use crypto)
   if (
     reqBody.adminName == "admin" &&
     reqBody.adminPassword == "adminpasswordfordev"
@@ -25,7 +27,10 @@ export async function POST(req: NextRequest) {
       authKey: randomUUID(),
       validUntil: validDate.getTime(),
     };
-    client.db("proteinpedia").collection("cred").insertOne(authDoc);
+    // Insert new record
+    credDbRef.insertOne(authDoc);
+    // Remove expired records
+    credDbRef.deleteMany({ validUntil: { $lt: Date.now() } });
     return new NextResponse(
       JSON.stringify(authDoc),
     );
